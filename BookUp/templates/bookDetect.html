@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <!-- <link rel="stylesheet" href="bookstyle.css"> -->
+        <!-- <link rel="stylesheet" href="searchstyle.css"> -->
+        <title>Book Detection</title>
+    </head>
+
+    <body>
+    <div class="container">
+      <form action="">
+        <!-- <img src = "assets/211818_search_icon.svg"> -->
+        <input type="text" name="q" placeholder="search anything" class="search-bar">
+        <button type="submit">Search</button>
+
+        
+        <a href="#">image</a>
+        <a href="#">voice</a><br>
+
+        Book Name : {{book_detail.book_name}}<br>  <!--Make a new webpage to display these info on post request-->
+        Author : {{book_detail.author_name}}<br>  <!--Check how to show more than one data-->
+        Description : {{book_detail.book_description}}
+
+      </form>
+    </div> 
+        
+    </body>
+</html>
