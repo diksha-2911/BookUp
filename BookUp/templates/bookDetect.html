@@ -15,9 +15,11 @@
 
     <body>
     <div class="container">
-      <form action="">
+   
+      <form method="post" action="">
+        {% csrf_token %}
         <!-- <img src = "assets/211818_search_icon.svg"> -->
-        <input type="text" name="q" placeholder="search anything" class="search-bar">
+        <input type="text" name="query" placeholder="search anything" class="search-bar">
         <button type="submit">Search</button>
 
         
