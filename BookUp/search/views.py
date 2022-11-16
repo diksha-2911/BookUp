@@ -23,6 +23,7 @@ import requests
 
 
 def index(request):
+    book_detail = {}
     if request.method=='POST':
         query = request.POST['query']
         print(query)
