@@ -33,7 +33,8 @@ def index(request):
         book_detail = {
                 "book_name" : response['items'][0]['volumeInfo']['title'],
                 "author_name" : response['items'][0]['volumeInfo']['authors'],
-                "book_description" : response['items'][0]['volumeInfo']['description']
+                "book_description" : response['items'][0]['volumeInfo']['description'],
+                "book_img" : response['items'][0]['volumeInfo']['imageLinks']['smallThumbnail']
             }
         
 
