@@ -18,14 +18,35 @@
     <body>
     <div class="container">
    
-      <form method="post" action="">
+      <form method="post" action="" enctype="multipart/form-data">
         {% csrf_token %}
         <!-- <img src = "assets/211818_search_icon.svg"> -->
         <input type="text" name="query" placeholder="search anything" class="search-bar">
         <button type="submit">Search</button>
 
         
-        <a href="#">image</a>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          image
+        </button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                {% comment %} <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close_mic"></button> {% endcomment %}
+              </div>
+              <div class="modal-body">
+                <form action="" method = "post" id="search-form">
+                  <input name="image" type="file" id="convertedText" placeholder="Add File" autocomplete="off" autofocus>
+                </form>
+              </div>
+              <div class="modal-footer">
+                {% comment %} <input type="submit" id="close_mic"> {% endcomment %}
+                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal" id="close_mic">Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {% comment %} voice {% endcomment %}
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -46,18 +67,26 @@
               </div>
               <div class="modal-footer">
                 {% comment %} <input type="submit" id="close_mic"> {% endcomment %}
-                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal" id="close_mic">Close</button>
+                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal" id="close_mic">Search</button>
               </div>
             </div>
           </div>
         </div>
         
 
-        Book Name : {{book_detail.book_name}}<br>  <!--Make a new webpage to display these info on post request-->
-        Author : {{book_detail.author_name}}<br>  <!--Check how to show more than one data-->
-        Description : {{book_detail.book_description}}
-        Image: <image src={{book_detail.book_img}}></image>
+        {% comment %} Book Name: {{book_detail.book_name}}<br>
+        Author: {{book_detail.author_name}}<br>
+        Description: {{book_detail.book_description}}<br>
+        Image: <image src={{book_detail.book_img}}></image> <br> {% endcomment %}
 
+
+    
+        {% for b in book_detail %}
+            {{b.book_data['book_name']}}<br>  <!--Make a new webpage to display these info on post request-->
+            {{b.book_data['author_name']}}<br>  <!--Check how to show more than one data-->
+            {{b.book_data['book_description']}}
+            <image src={{b.book_img}}></image> 
+        {% endfor %}  
       </form>
     </div> 
         
