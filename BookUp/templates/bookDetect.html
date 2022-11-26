@@ -24,7 +24,6 @@
         <input type="text" name="query" placeholder="search anything" class="search-bar">
         <button type="submit">Search</button>
 
-        
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
           image
         </button>
@@ -42,21 +41,20 @@
               </div>
               <div class="modal-footer">
                 {% comment %} <input type="submit" id="close_mic"> {% endcomment %}
-                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal" id="close_mic">Search</button>
+                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal" id="close_img">Search</button>
               </div>
             </div>
           </div>
-        </div>
-
-        {% comment %} voice {% endcomment %}
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        </div> 
+        
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#voiceModal">
           voice
         </button>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="voiceModal" tabindex="-1" aria-labelledby="voiceModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <h1 class="modal-title fs-5" id="voiceModalLabel">Modal title</h1>
                 {% comment %} <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close_mic"></button> {% endcomment %}
               </div>
               <div class="modal-body">
@@ -72,20 +70,24 @@
             </div>
           </div>
         </div>
+
+      
         
 
-        {% comment %} Book Name: {{book_detail.book_name}}<br>
-        Author: {{book_detail.author_name}}<br>
-        Description: {{book_detail.book_description}}<br>
-        Image: <image src={{book_detail.book_img}}></image> <br> {% endcomment %}
-
-
+        {% comment %} voice {% endcomment %}
+        
+        
     
-        {% for b in book_detail %}
-            {{b.book_data['book_name']}}<br>  <!--Make a new webpage to display these info on post request-->
-            {{b.book_data['author_name']}}<br>  <!--Check how to show more than one data-->
-            {{b.book_data['book_description']}}
-            <image src={{b.book_img}}></image> 
+        {% for b in items %}
+          <div>
+            Book name: {{b.volumeInfo.title}}<br>  <!--Make a new webpage to display these info on post request--> 
+            Author Name: {% for c in b.volumeInfo.authors %}
+                              {{c}}<br>  <!--Check how to show more than one data-->
+                        {% endfor %}
+            Book Description: {{b.volumeInfo.description}}<br>
+            Book Image: <image src={{b.volumeInfo.imageLinks.smallThumbnail}}></image>
+          </div>
+
         {% endfor %}  
       </form>
     </div> 
@@ -112,6 +114,7 @@
     function startSpeechRecognition()
     {
       console.log("Speech Active")
+      
     }
   
     close_mic.addEventListener("click", function(){
@@ -121,18 +124,17 @@
         console.log("Speech Disconnected");
       }
     })
-  
-  
+    
     recognition.addEventListener("result", resultOfSpeechRecognition);
     function resultOfSpeechRecognition(event)
     {
       const transcript = event.results[0][0].transcript;
       convertedText.value = transcript;
+      console.log(transcript)
     }
   
-  
+    
   
   })
   
-  
-  </script>
+</script>

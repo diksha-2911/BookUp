@@ -11,7 +11,7 @@ import pytesseract
 def index(request):
     query = ""
     query2= ""
-    book_detail = {}
+    response = {}
     context = {}
     book = Search()
     if request.method=='POST':
@@ -68,32 +68,20 @@ def index(request):
             print(query2)
             context = detail(query2)
 
-        
-    
-    # context = {"book_detail" : book_detail}
+        # context = {"book_detail" : book_detail}
      
-    return render(request, 'BookDetect.html', {"book_detail" : context})
+    return render(request, 'BookDetect.html', {"items" : context})
 
 
 def detail(query):
-            book_detail = {}
+            book_final = {}
             if query != "":
                 url = "https://www.googleapis.com/books/v1/volumes?q={}&key=AIzaSyCVx4jHICEs3Dt8VYlxupTeibnYhBziBkU"
                 response = requests.get(url.format(query)).json()
-                # print(response['items'][0]['volumeInfo']['title'])
-                for i in range(1):
-                    book_detail = {
-                        'book_data' : [
-                            {"book_name" : response['items'][0]['volumeInfo']['title'],
-                            "author_name" : response['items'][0]['volumeInfo']['authors'],
-                            "book_description" : response['items'][0]['volumeInfo']['description'],
-                            "book_img" : response['items'][0]['volumeInfo']['imageLinks']['smallThumbnail']}
-                        ]
-                    }
-                    print(book_detail['book_data'])
-            
-                    
-
-            
-            return book_detail
+                items= response['items']
+                # "book_name" : response['items'][0]['volumeInfo']['title'],
+                # "author_name" : response['items'][0]['volumeInfo']['authors'],
+                # "book_description" : response['items'][0]['volumeInfo']['description'],
+                # "book_img" : response['items'][0]['volumeInfo']['imageLinks']['smallThumbnail']
+            return items
 
