@@ -118,7 +118,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "templates"
+    BASE_DIR / "static"
 ]
 
 #managing media
